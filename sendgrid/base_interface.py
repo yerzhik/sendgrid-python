@@ -2,7 +2,7 @@ import python_http_client
 
 
 class BaseInterface(object):
-    def __init__(self, auth, host, impersonate_subuser):
+    def __init__(self, auth, host, proxies_no_auth, impersonate_subuser):
         """
         Construct the Twilio SendGrid v3 API object.
         Note that the underlying client is being set up during initialization,
@@ -30,7 +30,9 @@ class BaseInterface(object):
         self.client = python_http_client.Client(
             host=self.host,
             request_headers=self._default_headers,
-            version=3)
+            version=3,
+            proxies_without_auth_dict=proxies_no_auth
+        )
 
     @property
     def _default_headers(self):
